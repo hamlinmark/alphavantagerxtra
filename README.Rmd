@@ -1,0 +1,126 @@
+---
+title: "Alpavantage Xtra"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+There is an Alpha Vantage SDK shipped along with Tidyquant which provided access to interday prices.
+This package aims to provide R users with convenient functions to access other API features.
+Starting with financial documents and IPO Calendar.
+
+You will need a API key from Alpha Vantage which can be obtained by signing up to [](https://www.alphavantage.co/).
+
+There is basic file based caching available which is disabled by default.  Make sure you use the cachine feature if you want to download a information for more than a handful of companies beacuase you will quickly meet API rate limits otherwise.
+
+### Use Cases
+
+- Intrinsic Valuation.
+- Portfolio Weighting.
+- Stock Selection.
+
+R version 4.1 or higher is required.
+
+## Basic Usage
+
+## Set API Token
+
+Set this environment variable in your ~/.Renviron file.  
+Or set it for session with the Sys.setenv command.
+
+```{r setup_packages}
+library(alphavantagerxtra)
+library(tidyverse)
+# Sys.setenv("ALPHA_VANTAGE_TOKEN" = "ABCD12345")
+```
+
+## IPO Calendar
+```{r ipo_calendar}
+ipo_calendar <- av_get_ipo_calendar() |> t()
+knitr::kable(ipo_calendar)
+```
+
+## Company Overview
+```{r company_overview}
+# Pause to prevent API rate limits.
+Sys.sleep(10)
+amazon_overview <- av_get_overview("AMZN")
+names(amazon_overview)
+amazon_overview |> human_readable_tibble() |> t() |> knitr::kable()
+```
+
+## Company Balance Sheet
+```{r company_balance_sheet}
+facebook_balance_sheet <- av_get_balance_sheet("FB")
+names(facebook_balance_sheet)
+facebook_balance_sheet |> 
+  human_readable_tibble() |> 
+  select (fiscal_date_ending:cash_and_cash_equivalents_at_carrying_value) |>
+  knitr::kable()
+```
+
+## Company Cash Flow
+```{r cash_flow}
+# Pause to prevent API rate limits.
+Sys.sleep(10)
+
+jpmorgan_cash_flow <- av_get_cash_flow("JPM")
+names(jpmorgan_cash_flow)
+jpmorgan_cash_flow |> 
+  human_readable_tibble() |> 
+  select(fiscal_date_ending:operating_cashflow, net_income) |>
+  knitr::kable()
+```
+
+
+## Company earnings
+```{r earnings}
+# Pause to prevent API rate limits.
+Sys.sleep(10)
+
+twtr_earnings <- av_get_earnings("TWTR")
+names(twtr_earnings)
+twtr_earnings |> 
+  human_readable_tibble() |> 
+  knitr::kable()
+```
+
+## Income Statement
+
+Quarterly and Annuals earnings are returned in the same tibble.  Filter on the periodicity column to just get one type.
+
+```{r income_statement}
+# Pause to prevent API rate limits.
+Sys.sleep(10)
+
+morgan_stanley_income_statement <- av_get_income_statement("MS")
+names(morgan_stanley_income_statement)
+morgan_stanley_income_statement |> 
+  filter(periodicity == "annual") |>
+  human_readable_tibble() |> 
+  select(fiscal_date_ending:total_revenue, operating_income, ebitda, net_income) |>
+  knitr::kable(caption = "Annual Earnings")
+
+morgan_stanley_income_statement |> 
+  filter(periodicity == "quarterly") |>
+  human_readable_tibble() |> 
+  select(fiscal_date_ending:total_revenue, operating_income, ebitda, net_income) |>
+  knitr::kable(caption = "Quarterly Earnings")
+
+
+```
+
+# More help
+
+Use ?alphavantagerxtra inside your R session.
+
+## Contact the Author
+- [email Mark Hamlin @ badattribute@gmail.com](mailto:badattribute@gmail.com)
+- [twitter](https://twitter.com/markchamlin)
+- [https://blog.badattribute.com](https://blog.badattribute.com/)

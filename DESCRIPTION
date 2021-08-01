@@ -1,0 +1,28 @@
+Package: alphavantagerxtra
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: Mark Hamlin <badattribute@gmail.com>
+Maintainer: Mark Hamlin <badattribute@gmail.com>
+Description: Provide features missing from the core Alphavantager 
+    library.
+License: BSD
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    alphavantager,
+    dplyr,
+    glue,
+    httr,
+    janitor,
+    jsonlite,
+    lubridate,
+    scales,
+    stats,
+    stringr,
+    tibble,
+    tidyquant
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.1.1
