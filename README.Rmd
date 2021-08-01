@@ -17,7 +17,7 @@ There is an Alpha Vantage SDK shipped along with Tidyquant which provided access
 This package aims to provide R users with convenient functions to access other API features.
 Starting with financial documents and IPO Calendar.
 
-You will need a API key from Alpha Vantage which can be obtained by signing up to [](https://www.alphavantage.co/).
+You will need a API key from Alpha Vantage which can be obtained by signing up to [https://www.alphavantage.co/](https://www.alphavantage.co/).
 
 There is basic file based caching available which is disabled by default.  Make sure you use the cachine feature if you want to download a information for more than a handful of companies beacuase you will quickly meet API rate limits otherwise.
 
@@ -36,7 +36,7 @@ R version 4.1 or higher is required.
 Set this environment variable in your ~/.Renviron file.  
 Or set it for session with the Sys.setenv command.
 
-```{r setup_packages}
+```{r setup_packages, message = FALSE}
 library(alphavantagerxtra)
 library(tidyverse)
 # Sys.setenv("ALPHA_VANTAGE_TOKEN" = "ABCD12345")

@@ -22,7 +22,7 @@ with convenient functions to access other API features. Starting with
 financial documents and IPO Calendar.
 
 You will need a API key from Alpha Vantage which can be obtained by
-signing up to [](https://www.alphavantage.co/).
+signing up to [https://www.alphavantage.co/](https://www.alphavantage.co/).
 
 There is basic file based caching available which is disabled by
 default. Make sure you use the cachine feature if you want to download a
@@ -47,20 +47,6 @@ Or set it for session with the Sys.setenv command.
 ``` r
 library(alphavantagerxtra)
 library(tidyverse)
-```
-
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-
-    ## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-    ## ✓ tibble  3.1.2     ✓ dplyr   1.0.7
-    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-    ## ✓ readr   1.4.0     ✓ forcats 0.5.1
-
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 # Sys.setenv("ALPHA_VANTAGE_TOKEN" = "ABCD12345")
 ```
 
