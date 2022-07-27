@@ -211,7 +211,7 @@ av_get_earnings <- function(symbol) {
   log_msg("debug", "av_get_earnings enter")
   data <- av_get_response(symbol, av_fun = "EARNINGS") |>
     av_json() |>
-    av_section("annualEarnings") |>
+    av_section("quarterlyEarnings") |>
     av_format() |>
     dplyr::mutate(symbol = symbol) |>
     dplyr::relocate(symbol)
