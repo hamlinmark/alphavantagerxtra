@@ -130,7 +130,7 @@ av_get_balance_sheet <- function(symbol) {
   log_msg("debug", "av_get_balance_sheet enter")
   data <- av_get_response(symbol, av_fun = "BALANCE_SHEET") |>
     av_json() |>
-    av_section("annualReports") |>
+    av_section("quarterlyReports") |>
     av_format() |>
     dplyr::mutate(symbol = symbol)
 
